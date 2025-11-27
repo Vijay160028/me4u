@@ -38,13 +38,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation: _navigation}) => {
   const userName = 'Abhishek Singh'; // This would come from user data/context
   const insets = useSafeAreaInsets();
   const bottomInset = insets.bottom || 0;
-  const tabBarHeight = scale(60) + bottomInset;
+  const tabBarHeight = scale(65) + bottomInset;
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[styles.scrollContent, {paddingBottom: tabBarHeight + scale(20)}]}
+        contentContainerStyle={[styles.scrollContent, {paddingBottom: tabBarHeight + scale(24)}]}
         showsVerticalScrollIndicator={false}>
         {/* Header Section */}
         <View style={styles.header}>
@@ -404,6 +404,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   destinationImageStyle: {
+    width: '100%',
+    height: '100%',
     opacity: 0.9,
   },
   destinationOverlay: {

@@ -82,39 +82,47 @@ const SoonScreen = () => (
 export const HomeTabNavigator = () => {
   const insets = useSafeAreaInsets();
   const bottomInset = insets.bottom || 0;
+  const tabBarBaseHeight = scale(65);
   
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#FF6347',
-        tabBarInactiveTintColor: '#666666',
+        tabBarInactiveTintColor: '#999999',
         tabBarStyle: {
-          height: scale(60) + bottomInset,
-          minHeight: scale(55) + bottomInset,
-          paddingBottom: Math.max(bottomInset, scale(Platform.OS === 'ios' ? 8 : 4)),
-          paddingTop: scale(8),
-          borderRadius: scale(16),
-          borderTopWidth: 1,
-          borderTopColor: '#E0E0E0',
+          height: tabBarBaseHeight + bottomInset,
+          minHeight: scale(60) + bottomInset,
+          paddingBottom: Math.max(bottomInset, scale(Platform.OS === 'ios' ? 10 : 6)),
+          paddingTop: scale(10),
+          paddingHorizontal: scale(8),
+          borderTopWidth: 0,
+          backgroundColor: '#FFFFFF',
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          elevation: 8,
+          elevation: 12,
           shadowColor: '#000',
-          shadowOffset: {width: 0, height: -2},
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
+          shadowOffset: {width: 0, height: -4},
+          shadowOpacity: 0.12,
+          shadowRadius: 8,
+          borderTopLeftRadius: scale(20),
+          borderTopRightRadius: scale(20),
         },
         tabBarLabelStyle: {
-          fontSize: scaleFont(12),
+          fontSize: scaleFont(11),
           fontWeight: '600',
-          marginTop: scale(-4),
-          marginBottom: bottomInset > 0 ? scale(2) : 0,
+          marginTop: scale(-2),
+          marginBottom: bottomInset > 0 ? scale(4) : scale(2),
+          letterSpacing: 0.3,
         },
         tabBarIconStyle: {
-          marginTop: scale(4),
+          marginTop: scale(2),
+          marginBottom: scale(2),
+        },
+        tabBarItemStyle: {
+          paddingVertical: scale(4),
         },
       }}>
       <Tab.Screen
