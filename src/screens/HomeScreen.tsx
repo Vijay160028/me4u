@@ -10,7 +10,7 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
@@ -36,12 +36,15 @@ interface HomeScreenProps {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation: _navigation}) => {
   const userName = 'Abhishek Singh'; // This would come from user data/context
+  const insets = useSafeAreaInsets();
+  const bottomInset = insets.bottom || 0;
+  const tabBarHeight = scale(60) + bottomInset;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, {paddingBottom: tabBarHeight + scale(20)}]}
         showsVerticalScrollIndicator={false}>
         {/* Header Section */}
         <View style={styles.header}>
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: scale(100), // Responsive space for bottom navigation
+    // paddingBottom is calculated dynamically based on tab bar height
   },
   header: {
     flexDirection: 'row',

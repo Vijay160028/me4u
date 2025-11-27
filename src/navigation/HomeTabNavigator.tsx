@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import HomeScreen from '../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
-const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
 // Responsive scaling functions
 const scale = (size: number) => {
@@ -79,6 +80,9 @@ const SoonScreen = () => (
 );
 
 export const HomeTabNavigator = () => {
+  const insets = useSafeAreaInsets();
+  const bottomInset = insets.bottom || 0;
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -86,15 +90,17 @@ export const HomeTabNavigator = () => {
         tabBarActiveTintColor: '#FF6347',
         tabBarInactiveTintColor: '#666666',
         tabBarStyle: {
-          height: scale(60),
-          minHeight: scale(55),
-          maxHeight: scale(70),
-          paddingBottom: scale(Platform.OS === 'ios' ? 20 : 8),
+          height: scale(60) + bottomInset,
+          minHeight: scale(55) + bottomInset,
+          paddingBottom: Math.max(bottomInset, scale(Platform.OS === 'ios' ? 8 : 4)),
           paddingTop: scale(8),
           borderRadius: scale(16),
           borderTopWidth: 1,
           borderTopColor: '#E0E0E0',
           position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
           elevation: 8,
           shadowColor: '#000',
           shadowOffset: {width: 0, height: -2},
@@ -105,6 +111,7 @@ export const HomeTabNavigator = () => {
           fontSize: scaleFont(12),
           fontWeight: '600',
           marginTop: scale(-4),
+          marginBottom: bottomInset > 0 ? scale(2) : 0,
         },
         tabBarIconStyle: {
           marginTop: scale(4),
