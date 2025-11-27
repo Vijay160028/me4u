@@ -27,15 +27,13 @@ type Gender = 'male' | 'female' | 'other';
 const LastStepScreen: React.FC<LastStepScreenProps> = ({navigation}) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [lastName, setLastName] = useState('');
   const [selectedGender, setSelectedGender] = useState<Gender>('male');
 
   const handleLetsTravel = () => {
     // Validate and submit user information
-    if (fullName.trim() && email.trim() && lastName.trim()) {
+    if (fullName.trim() && email.trim()) {
       console.log('User info submitted:', {
         fullName,
-        lastName,
         email,
         gender: selectedGender,
       });
@@ -84,15 +82,6 @@ const LastStepScreen: React.FC<LastStepScreenProps> = ({navigation}) => {
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="FULL NAME"
-            placeholderTextColor="#999999"
-            value={lastName}
-            onChangeText={setLastName}
-            autoCapitalize="words"
           />
         </View>
 
